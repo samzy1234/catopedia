@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Cat Medical Records</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-size: cover;
+            background-color: #d5d2c3;
+            color: #ffffff;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 700px;
+            margin: 50px auto;
+            padding: 20px;
+            color: #333;
+        }
+        .container h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .record-actions form {
+            display: inline;
+        }
+        .record-actions button {
+            background-color: #e74c3c;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .record-actions button:hover {
+            background-color: #c0392b;
+        }
+        .add-record-form {
+            margin-top: 20px;
+        }
+        .add-record-form input, .add-record-form textarea, .add-record-form select {
+            width: 100%;
+            margin-bottom: 10px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .add-record-form button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 50px;
+            cursor: pointer;
+            align-items: center;
+        }
+        .add-record-form button:hover {
+            background-color: #45a049;
+        }
+        .pagination {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .pagination a {
+            margin: 0 5px;
+            padding: 10px 15px;
+            background-color: #333;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        .pagination a:hover {
+            background-color: #555;
+        }
+        .reminders-link {
+            text-align: center;
+            margin: 20px 0;
+        }
+        .reminders-link a {
+            color: #ffffff;
+            background-color: #007bff;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+        .reminders-link a:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Cat Medical Records</h1>
+
+        <!-- Link to Medical Reminders Page -->
+        <div class="reminders-link">
+            <a href="{{ url_for('medical_reminders') }}">View Medical Reminders</a>
+        </div>
+
+
+        <div class="pagination">
+            {% if records.has_prev %}
+                <a href="{{ url_for('medical_records', page=records.prev_num) }}">Previous</a>
+            {% endif %}
+            {% if records.has_next %}
+                <a href="{{ url_for('medical_records', page=records.next_num) }}">Next</a>
+            {% endif %}
+        </div>
+
+        <form method="POST" class="add-record-form">
+            <label for="cat_name">Cat Name</label>
+            <input type="text" name="cat_name" id="cat_name" placeholder="Enter Cat Name" required>
+
+            <!-- Dropdown for Age Group -->
+            <label for="age_group">Age Group</label>
+            <select name="age_group" id="age_group" required>
+                <option value="" disabled selected>Select Age Group</option>
+                <option value="Kitten">Kitten</option>
+                <option value="Adult">Adult</option>
+            </select>
+            
+            <label for="medical_history">Medical History</label>
+            <select name="medical_history" id="medical_history" required>
+                <option value="" disabled selected>Select Medical History</option>
+                <option value="No previous issues">No previous issues</option>
+                <option value="Vaccinated">Vaccinated</option>
+                <option value="Allergies">Allergies</option>
+                <option value="Chronic illness">Chronic illness</option>
+            </select>
+
+            <!-- Dropdown for Specific Vaccine -->
+            <label for="specific_vaccine">Specific Vaccine</label>
+            <select name="specific_vaccine" id="specific_vaccine" required>
+                <option value="" disabled selected>Select Vaccine</option>
+                <option value="FVRCP">FVRCP</option>
+                <option value="Rabies">Rabies</option>
+                <option value="Leukemia">Leukemia</option>
+            </select>
+
+            <!-- Checkbox for Vaccine Received -->
+            <label for="vaccine_received">Confirm Vaccine Received</label>
+            <div>
+                <input type="checkbox" name="vaccine_received" id="vaccine_received">
+                <label for="vaccine_received" style="display: inline;">I confirm that the vaccine has been received</label>
+            </div>
+
+            <!-- Dropdown for Reminders -->
+            <label for="reminders">Reminders</label>
+            <select name="reminders" id="reminders" required>
+                <option value="" disabled selected>Select Reminder</option>
+                <option value="Vaccination due">Vaccination due</option>
+                <option value="Check-up due">Check-up due</option>
+                <option value="Deworming due">Deworming due</option>
+            </select>
+
+            <!-- Input for Vaccination Location -->
+            <label for="vaccine_location">Vaccination Location</label>
+            <input type="text" name="vaccine_location" id="vaccine_location" placeholder="Enter Location (e.g., Local Clinic)" required>
+
+            <!-- Input for Contact Information -->
+            <label for="contact_info">Contact Information</label>
+            <input type="text" name="contact_info" id="contact_info" placeholder="Enter Contact Info (e.g., Phone Number)" required>
+
+            <!-- Date Input for Reminder Date -->
+            <label for="reminder_date">Set Reminder Date</label>
+            <input type="date" name="reminder_date" id="reminder_date" placeholder="Set Reminder Date" required>
+
+            <!-- Submit Button -->
+            <button type="submit">Add Record</button>
+        </form>
+    </div>
+</body>
+</html>
