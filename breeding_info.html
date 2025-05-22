@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ breeding.name }}</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-size: cover;
+            background-color: #d5d2c3;
+            color: #ffffff;
+            margin: 0;
+            padding: 0;
+        }
+        .navbar {
+            display: flex;
+            align-items: center;
+            height: 50px;
+            padding: 13px;
+            background: transparent;
+            position: sticky;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            padding: 14px 20px;
+        }
+        .navbar a:hover {
+            color: rgb(255, 255, 255);
+        }
+        .content-container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            color: #333;
+        }
+        .content-container img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+        .content-container h1 {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .content-container p {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <div class="logo">
+            <h1><a href="{{ url_for('home') }}" style="color: white; text-decoration: none;">P <span><img src="/static/images/pngwing.com (34).png" alt="paw" height="35px" width="35px"></span> WCAT</a></h1>
+        </div>
+        <div class="menu">
+            <a href="{{ url_for('cat_breeding') }}">Back to Cat Breeding</a>
+        </div>
+    </div>
+    <div class="content-container">
+        <img src="{{ breeding.image_url }}" alt="{{ breeding.name }}">
+        <h1>{{ breeding.name }}</h1>
+        <p>{{ breeding.description }}</p>
+    </div>
+</body>
+</html>
